@@ -1,16 +1,26 @@
-import axios from 'axios'
-import { cookies } from 'next/headers'
-import { _getItemList } from './commonApi'
+import axios from 'axios';
 
-const pokemonApiUrl = 'https://pokeapi.co/api/v2'
+const pokemonApiUrl = 'https://pokeapi.co/api/v2';
 
-const serverApi = axios.create({ adapter: 'fetch', baseURL: pokemonApiUrl })
+const serverAxiosInstance = axios.create({
+  adapter: 'fetch',
+  baseURL: pokemonApiUrl,
+});
 
-const cookie = cookies()
-//console.log('cookie = ', cookie)
+serverAxiosInstance.interceptors.response.use(
+  async responseConfig => {
+    console.log('interceptor');
+    console.log(await loadCookie());
+    return responseConfig;
+  },
+  error => {
+    return 200;
+  },
+);
 
-export async function getItemList(amount: number, offset: number) {
-  return _getItemList(serverApi, amount, offset)
+async function loadCookie() {
+  const { cookies } = await import('next/headers');
+  return cookies();
 }
 
-export default serverApi
+export default serverAxiosInstance;

@@ -1,13 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { getItemList } from '../../../api/clientApi';
+import { getItemList } from '../../../api/commonApi';
 
 interface IItemList {
   defaultItemList: unknown;
 }
 
-const defaultItemList: React.FC<IItemList> = ({ defaultItemList }) => {
+const ItemList: React.FC<IItemList> = ({ defaultItemList }) => {
   const [itemList, setItemList] = useState(defaultItemList);
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -34,4 +34,4 @@ const defaultItemList: React.FC<IItemList> = ({ defaultItemList }) => {
   );
 };
 
-export default defaultItemList;
+export default ItemList;

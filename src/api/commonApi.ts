@@ -5,12 +5,13 @@ export function getAxiosInstance() {
   if (isServerEnvironment()) {
     return serverAxiosInstance;
   } else {
+    console.dir(clientAxiosInstance);
     return clientAxiosInstance;
   }
 }
 
 function isServerEnvironment() {
-  return typeof window === undefined;
+  return typeof window === 'undefined';
 }
 
 export async function getItemList(amount: number, offset: number) {

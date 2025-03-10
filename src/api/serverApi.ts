@@ -7,16 +7,12 @@ const serverAxiosInstance = axios.create({
   baseURL: pokemonApiUrl,
 });
 
-serverAxiosInstance.interceptors.response.use(
-  async responseConfig => {
-    console.log('interceptor');
-    console.log(await loadCookie());
-    return responseConfig;
-  },
-  error => {
-    return 200;
-  },
-);
+serverAxiosInstance.interceptors.request.use(async request => {
+  const cookie = await loadCookie();
+  cookie.get('something');
+
+  return request;
+});
 
 async function loadCookie() {
   const { cookies } = await import('next/headers');

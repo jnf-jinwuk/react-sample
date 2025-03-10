@@ -1,0 +1,11 @@
+node_modules
+.idea
+yarn.lock
+package-lock.json
+public
+.json
+coverage
+tsconfig.json
+tsconfig.paths.json
+package.json
+.next

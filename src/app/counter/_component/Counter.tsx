@@ -1,12 +1,10 @@
 'use client'
-
-import { useDispatch } from 'react-redux'
-import useAppSelector from '../../../store'
-import { increment, incrementX, incrementY } from '../../../store/slice/counter'
+import { increment, incrementX, incrementY } from '@/store/slice/counter'
+import { useAppDispatch, useAppSelector } from '@/store'
 
 const Counter = () => {
   const counter = useAppSelector((state) => state.counter)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   return (
     <div>

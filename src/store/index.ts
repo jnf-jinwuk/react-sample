@@ -1,8 +1,10 @@
-import { useSelector } from 'react-redux'
-import { TState } from './store'
+import { useDispatch, useSelector } from 'react-redux'
+import { TDispatch, TState } from './store'
 
 const useAppSelector = <TSelected>(
   selector: (state: TState) => TSelected,
 ): TSelected => useSelector(selector)
 
-export default useAppSelector
+const useAppDispatch = useDispatch<TDispatch>
+
+export { useAppSelector, useAppDispatch }

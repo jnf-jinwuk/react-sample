@@ -21,8 +21,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": [
-        "src/main/js/src/*"
-      ]
+        "src/*"
+      ],
+      "@store/*": ["src/store/*"]
     },
     "plugins": [
       {

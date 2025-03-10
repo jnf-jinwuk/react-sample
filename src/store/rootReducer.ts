@@ -1,12 +1,10 @@
-//모든 슬라이스 파일에서 리듀서 임포트...
-//import productListReducer from ./slice/productListSlice/slice
-//import couponTypeListReducer from ./slice/couponTypeListSlice/slice
-//...
+import { combineReducers } from 'redux'
+import counterReducer from './slice/counter'
+import colorReducer from './slice/color'
 
-//const rootReducer = combineReducers(
-//  productListReducer,
-//  couponTypeList,
-//  ...
-//)
+const rootReducer = combineReducers({
+  counter: counterReducer,
+  color: colorReducer,
+})
 
-//export default rootReducer
+export default rootReducer

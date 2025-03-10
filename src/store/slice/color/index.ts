@@ -25,8 +25,13 @@ const slice = createSlice({
     ) {
       state[action.payload.which] = action.payload.color
     },
+    invertColor(state) {
+      const temp = state.bgColor
+      state.bgColor = state.fgColor
+      state.fgColor = temp
+    },
   },
 })
 
-export const { changeColor } = slice.actions
+export const { changeColor, invertColor } = slice.actions
 export default slice.reducer

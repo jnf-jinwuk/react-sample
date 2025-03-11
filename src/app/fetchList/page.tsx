@@ -1,3 +1,5 @@
+'use server';
+
 import { getItemList } from '../../api/commonApi';
 import PokemonList from './_component/ItemList';
 

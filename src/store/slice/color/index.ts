@@ -1,16 +1,16 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-type TColor = 'red' | 'black'
+type TColor = 'red' | 'black';
 
 type TColorConfig = {
-  bgColor: TColor
-  fgColor: TColor
-}
+  bgColor: TColor;
+  fgColor: TColor;
+};
 
 const initialState: TColorConfig = {
   fgColor: 'red',
   bgColor: 'black',
-}
+};
 
 const slice = createSlice({
   name: 'color',
@@ -19,19 +19,19 @@ const slice = createSlice({
     changeColor(
       state,
       action: PayloadAction<{
-        which: 'fgColor' | 'bgColor'
-        color: TColor
+        which: 'fgColor' | 'bgColor';
+        color: TColor;
       }>,
     ) {
-      state[action.payload.which] = action.payload.color
+      state[action.payload.which] = action.payload.color;
     },
     invertColor(state) {
-      const temp = state.bgColor
-      state.bgColor = state.fgColor
-      state.fgColor = temp
+      const temp = state.bgColor;
+      state.bgColor = state.fgColor;
+      state.fgColor = temp;
     },
   },
-})
+});
 
-export const { changeColor, invertColor } = slice.actions
-export default slice.reducer
+export const colorSliceActions = slice.actions;
+export default slice.reducer;

@@ -1,10 +1,11 @@
-'use client'
-import { increment, incrementX, incrementY } from '@/store/slice/counter'
-import { useAppDispatch, useAppSelector } from '@/store'
+'use client';
+import { counterSliceActions } from '@/store/slice/counter';
+import { useAppDispatch, useAppSelector } from '@/store';
 
 const Counter = () => {
-  const counter = useAppSelector((state) => state.counter)
-  const dispatch = useAppDispatch()
+  const { increment, incrementX, incrementY } = counterSliceActions;
+  const counter = useAppSelector(state => state.counter);
+  const dispatch = useAppDispatch();
 
   return (
     <div>
@@ -15,6 +16,6 @@ const Counter = () => {
         x+100
       </button>
     </div>
-  )
-}
-export default Counter
+  );
+};
+export default Counter;

@@ -1,11 +1,12 @@
-'use client'
+'use client';
 
-import { useAppDispatch, useAppSelector } from '@/store'
-import { changeColor, invertColor } from '@/store/slice/color'
+import { useAppDispatch, useAppSelector } from '@/store';
+import { colorSliceActions } from '@/store/slice/color';
 
 const ColorPanel = () => {
-  const color = useAppSelector((state) => state.color)
-  const dispatch = useAppDispatch()
+  const { changeColor, invertColor } = colorSliceActions;
+  const color = useAppSelector(state => state.color);
+  const dispatch = useAppDispatch();
 
   return (
     <div>
@@ -29,6 +30,6 @@ const ColorPanel = () => {
         change bg to black
       </button>
     </div>
-  )
-}
-export default ColorPanel
+  );
+};
+export default ColorPanel;

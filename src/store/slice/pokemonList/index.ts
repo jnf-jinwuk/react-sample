@@ -4,7 +4,7 @@ import ReduxUtil from '../../ReduxUtil';
 
 const fetchPokemonList = createAsyncThunk(
   'pokemonList/fetchList',
-  async ({ amount, offset }) => {
+  async ({ amount, offset }: { amount: number; offset: number }) => {
     const res = await getItemList(amount, offset);
     return res.data.results;
   },
@@ -15,13 +15,13 @@ type TPokemonList = {
   url: string;
 }[];
 
-const initialState: TPokemonList = null;
+const initialState: TPokemonList = [];
 
 const slice = createSlice({
   name: 'pokemonList',
   initialState,
   reducers: {
-    initialize(_, action) {
+    initialize(state, action) {
       return action.payload;
     },
   },

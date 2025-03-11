@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getItemList } from '../../../api/commonApi';
-import { useAppDispatch, useAppSelector } from '@/store';
 import ReduxUtil from '../../ReduxUtil';
 
 const fetchPokemonList = createAsyncThunk(
@@ -11,7 +10,10 @@ const fetchPokemonList = createAsyncThunk(
   },
 );
 
-type TPokemonList = any[];
+type TPokemonList = {
+  name: string;
+  url: string;
+}[];
 
 const initialState: TPokemonList = null;
 
@@ -30,24 +32,9 @@ const slice = createSlice({
   },
 });
 
-let initialized = false;
-export const usePokemonState = initialState => {
-  const dispatch = useAppDispatch();
-  if (!initialized) {
-    dispatch(slice.actions.initialize(initialState));
-    initialized = true;
-  }
-  return useAppSelector(state => state.pokemonList);
-};
-
-export const usePokemonListActions = ReduxUtil.createUseActions(slice.actions, {
-  fetchPokemonList,
+export const usePokemonListSlice = ReduxUtil.createUseSlice({
+  slice,
+  thunkActions: { fetchPokemonList },
 });
-
-export const usePokemonSlice = initialState => {
-  const pokemonList = usePokemonState(initialState);
-  const wrappedActions = usePokemonListActions();
-  return { pokemonList, ...wrappedActions };
-};
 
 export default slice.reducer;

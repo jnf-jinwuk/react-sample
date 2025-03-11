@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { usePokemonSlice } from '@/store/slice/pokemonList';
+import { usePokemonListSlice } from '@/store/slice/pokemonList';
 import useMount from '@/lib/hook/useMount';
 
 interface IProps {
@@ -9,8 +9,9 @@ interface IProps {
 }
 
 const PokemonList: React.FC<IProps> = ({ defaultItemList }) => {
+  const [pokemonList, { fetchPokemonList }] =
+    usePokemonListSlice(defaultItemList);
   const [currentPage, setCurrentPage] = useState(0);
-  const { pokemonList, fetchPokemonList } = usePokemonSlice(defaultItemList);
   const isMount = useMount();
 
   async function handleLoadMore() {

@@ -1,9 +1,9 @@
 'use client';
-import { counterSliceActions } from '@/store/slice/counter';
+import { counterActions } from '@/store/slice/counter';
 import { useAppDispatch, useAppSelector } from '@/store';
 
 const Counter = () => {
-  const { increment, incrementX, incrementY } = counterSliceActions;
+  const { increment, incrementX, incrementY } = counterActions;
   const counter = useAppSelector(state => state.counter);
   const dispatch = useAppDispatch();
 

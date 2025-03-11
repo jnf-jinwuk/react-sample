@@ -5,7 +5,6 @@ export function getAxiosInstance() {
   if (isServerEnvironment()) {
     return serverAxiosInstance;
   } else {
-    console.dir(clientAxiosInstance);
     return clientAxiosInstance;
   }
 }

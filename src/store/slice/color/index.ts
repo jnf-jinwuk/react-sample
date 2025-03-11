@@ -33,5 +33,5 @@ const slice = createSlice({
   },
 });
 
-export const colorSliceActions = slice.actions;
+export const colorActions = slice.actions;
 export default slice.reducer;

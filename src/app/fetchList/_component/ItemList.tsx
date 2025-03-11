@@ -1,37 +1,53 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
-import { useState } from 'react';
-import { getItemList } from '../../../api/commonApi';
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { pokemonListActions } from '@/store/slice/pokemonList';
 
-interface IItemList {
+interface IProps {
   defaultItemList: unknown;
 }
 
-const ItemList: React.FC<IItemList> = ({ defaultItemList }) => {
-  const [itemList, setItemList] = useState(defaultItemList);
+const PokemonList: React.FC<IProps> = ({ defaultItemList }) => {
+  const dispatch = useAppDispatch();
+  const pokemonList = useAppSelector(state => state.pokemonList);
+  const { initialize, fetchPokemonList } = pokemonListActions;
+
   const [currentPage, setCurrentPage] = useState(0);
 
   async function handleLoadMore() {
-    const res = await getItemList(100, 100 * (currentPage + 1));
-    setItemList(res.data.results);
+    await dispatch(
+      fetchPokemonList({ amount: 100, offset: 100 * (currentPage + 1) }),
+    );
     setCurrentPage(prev => prev + 1);
+  }
+
+  useEffect(() => {
+    if (!pokemonList) {
+      dispatch(initialize(defaultItemList));
+    }
+  }, []);
+
+  if (!pokemonList) {
+    <p>loading</p>;
   }
 
   return (
     <div>
       <button onClick={handleLoadMore}> Load More </button>
 
-      {itemList.map((item, idx) => (
+      {pokemonList?.map((pokemon, idx) => (
         <p key={idx}>
           <span>
-            {idx} {item.name}
+            {idx} {pokemon.name}
           </span>
           <br />
-          <span>{item.url}</span>
+          <span>{pokemon.url}</span>
         </p>
       ))}
     </div>
   );
 };
 
-export default ItemList;
+export default PokemonList;

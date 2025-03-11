@@ -1,10 +1,10 @@
 'use client';
 
 import { useAppDispatch, useAppSelector } from '@/store';
-import { colorSliceActions } from '@/store/slice/color';
+import { colorActions } from '@/store/slice/color';
 
 const ColorPanel = () => {
-  const { changeColor, invertColor } = colorSliceActions;
+  const { changeColor, invertColor } = colorActions;
   const color = useAppSelector(state => state.color);
   const dispatch = useAppDispatch();
 

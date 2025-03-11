@@ -29,5 +29,5 @@ const slice = createSlice({
   },
 });
 
-export const counterSliceActions = slice.actions;
+export const counterActions = slice.actions;
 export default slice.reducer;

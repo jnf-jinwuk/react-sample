@@ -9,7 +9,7 @@ interface IProps {
 }
 
 const PokemonList: React.FC<IProps> = ({ defaultItemList }) => {
-  const [pokemonList, { fetchPokemonList }] =
+  const { fetchPokemonList, pokemonList } =
     usePokemonListSlice(defaultItemList);
   const [currentPage, setCurrentPage] = useState(0);
   const isMount = useMount();

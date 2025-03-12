@@ -10,12 +10,10 @@ export default class ReduxUtil {
     TThunkActions extends ActionCreatorsMapObject,
     TStateName extends string,
   >({
-    stateName,
     slice,
     thunkActions,
   }: {
-    stateName: TStateName;
-    slice: Slice<TState, TActions>;
+    slice: Slice<TState, TActions, TStateName>;
     thunkActions: TThunkActions;
   }) {
     const useActions = ReduxUtil.createUseActions(slice.actions, thunkActions);
@@ -30,7 +28,7 @@ export default class ReduxUtil {
       TReduxUtil.WrappedActions<TActions & TThunkActions> => {
       const actions = useActions();
       const state = useSelector(initialState);
-      return { [stateName]: state, ...actions };
+      return { [slice.name]: state, ...actions };
     };
   }
 

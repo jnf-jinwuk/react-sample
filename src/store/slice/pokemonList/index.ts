@@ -33,7 +33,6 @@ const slice = createSlice({
 });
 
 export const usePokemonListSlice = ReduxUtil.createUseSlice({
-  stateName: slice.name,
   slice,
   thunkActions: { fetchPokemonList },
 });

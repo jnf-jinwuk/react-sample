@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/store';
 import type { Slice, SliceCaseReducers } from '@reduxjs/toolkit';
+import { useEffect } from 'react';
 import type { ActionCreatorsMapObject } from 'redux';
 
 export default class ReduxUtil {
@@ -34,13 +35,16 @@ export default class ReduxUtil {
   }
 
   static createUseSelector(reducerPath: string, initAction) {
-    let initialized = false;
     return initialState => {
       const dispatch = useAppDispatch();
-      if (!initialized) {
-        dispatch(initAction(initialState));
-        initialized = true;
-      }
+
+      useEffect(() => {
+        if (initAction) {
+          //console.log(`initialize ${reducerPath} state. `, initialState);
+          dispatch(initAction(initialState));
+        }
+      }, [initialState, dispatch]);
+
       return useAppSelector(state => state[reducerPath]);
     };
   }

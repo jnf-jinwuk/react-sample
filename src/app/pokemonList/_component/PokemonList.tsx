@@ -28,7 +28,7 @@ const PokemonList: React.FC<IProps> = ({ defaultItemList }) => {
     <div>
       <button
         onClick={handleLoadMore}
-        disabled={pokemonList.status === 'pending' ? true : null}
+        disabled={pokemonList.status !== 'loaded'}
       >
         {pokemonList.status === 'pending' ? 'loading...' : 'load more'}
       </button>

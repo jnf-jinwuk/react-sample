@@ -1,10 +1,10 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getItemList } from '@/api/commonApi';
 import ReduxUtil from '@/store/ReduxUtil';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-const SLICE_NAME = 'pokemonList';
+const SLICE_NAME = 'abilityList';
 
-type TPokemonList = {
+type TAbilityList = {
   status: 'error' | 'pending' | 'loaded';
   data: {
     name: string;
@@ -12,7 +12,7 @@ type TPokemonList = {
   }[];
 };
 
-const initialState: TPokemonList = {
+const initialState: TAbilityList = {
   status: 'pending',
   data: [],
 };
@@ -27,16 +27,16 @@ const slice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(fetchPokemonList.fulfilled, (state, action) => {
+      .addCase(fetchAbilityList.fulfilled, (state, action) => {
         return { status: 'loaded', data: action.payload };
       })
-      .addCase(fetchPokemonList.pending, (state, action) => {
+      .addCase(fetchAbilityList.pending, (state, action) => {
         state.status = 'pending';
       });
   },
 });
 
-const fetchPokemonList = createAsyncThunk(
+const fetchAbilityList = createAsyncThunk(
   `${SLICE_NAME}/fetchList`,
   async ({ amount, offset }: { amount: number; offset: number }) => {
     const res = await getItemList(amount, offset);
@@ -44,9 +44,9 @@ const fetchPokemonList = createAsyncThunk(
   },
 );
 
-export const usePokemonListSlice = ReduxUtil.createUseSlice({
+export const useAbilityListSlice = ReduxUtil.createUseSlice({
   slice,
-  thunkActions: { fetchPokemonList },
+  thunkActions: { fetchAbilityList },
 });
 
 export default slice.reducer;

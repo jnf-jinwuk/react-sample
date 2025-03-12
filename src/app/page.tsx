@@ -4,15 +4,13 @@ export default function Home() {
   return (
     <main>
       <ul>
-        <li>
-          <Link href='/color'>color slice</Link>
-        </li>
-        <li>
-          <Link href='/counter'>counter slice</Link>
-        </li>
-        <li>
-          <Link href='/pokemonList'>axios api</Link>
-        </li>
+        {['/color', '/counter', '/pokemonList', '/abilityList'].map(
+          (pathName, idx) => (
+            <li key={pathName + idx}>
+              <Link href={pathName}>{pathName}</Link>
+            </li>
+          ),
+        )}
       </ul>
     </main>
   );

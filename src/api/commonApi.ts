@@ -14,7 +14,13 @@ function isServerEnvironment() {
 }
 
 export async function getItemList(amount: number, offset: number) {
-  return await getAxiosInstance().get(
-    `/pokemon?limit=${amount}&offset=${offset}`,
-  );
+  return getAxiosInstance().get(`/pokemon?limit=${amount}&offset=${offset}`);
+}
+
+export async function getItemListFail(after: number) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject('request failed');
+    }, after);
+  });
 }

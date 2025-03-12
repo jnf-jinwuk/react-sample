@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { getItemList } from '../../api/commonApi';
-import PokemonList from './_component/ItemList';
+import PokemonList from './_component/PokemonList';
 
 const page = async () => {
   const itemList = await getItemList(100, 0);

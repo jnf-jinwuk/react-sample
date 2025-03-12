@@ -19,12 +19,22 @@ const PokemonList: React.FC<IProps> = ({ defaultItemList }) => {
     setCurrentPage(prev => prev + 1);
   }
 
+  console.log('pokemonList ↓');
+  console.dir(pokemonList);
+  console.log('isMount =>', isMount);
+  console.log('pokemonList.status =>', pokemonList.status);
+
   return (
     <div>
-      <button onClick={handleLoadMore}> Load More </button>
+      <button
+        onClick={handleLoadMore}
+        disabled={pokemonList.status === 'pending' ? true : null}
+      >
+        {pokemonList.status === 'pending' ? 'loading...' : 'load more'}
+      </button>
 
       {isMount &&
-        pokemonList?.map((pokemon, idx) => (
+        pokemonList.data.map((pokemon, idx) => (
           <p key={idx}>
             <span>
               {idx} {pokemon.name}

@@ -11,24 +11,34 @@ const fetchPokemonList = createAsyncThunk(
 );
 
 type TPokemonList = {
-  name: string;
-  url: string;
-}[];
+  status: 'error' | 'pending' | 'loaded';
+  data: {
+    name: string;
+    url: string;
+  }[];
+};
 
-const initialState: TPokemonList = [];
+const initialState: TPokemonList = {
+  status: 'pending',
+  data: [],
+};
 
 const slice = createSlice({
   name: 'pokemonList',
   initialState,
   reducers: {
     initialize(state, action) {
-      return action.payload;
+      return { status: 'loaded', data: action.payload };
     },
   },
   extraReducers: builder => {
-    builder.addCase(fetchPokemonList.fulfilled, (state, action) => {
-      return action.payload;
-    });
+    builder
+      .addCase(fetchPokemonList.fulfilled, (state, action) => {
+        return { status: 'loaded', data: action.payload };
+      })
+      .addCase(fetchPokemonList.pending, (state, action) => {
+        state.status = 'pending';
+      });
   },
 });
 

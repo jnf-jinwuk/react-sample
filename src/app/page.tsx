@@ -11,7 +11,7 @@ export default function Home() {
           <Link href='/counter'>counter slice</Link>
         </li>
         <li>
-          <Link href='/fetchList'>axios api</Link>
+          <Link href='/pokemonList'>axios api</Link>
         </li>
       </ul>
     </main>
